@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Growth | SocialScope – Bhargavi N</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-brand">
+    <a href="index.html" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:inherit;">
+      <span class="brand-icon">📊</span>
+      <span class="brand-name">SocialScope</span>
+    </a>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html" class="nav-link">Overview</a></li>
+    <li><a href="platforms.html" class="nav-link">Platforms</a></li>
+    <li><a href="posts.html" class="nav-link">Posts</a></li>
+    <li><a href="growth.html" class="nav-link active">Growth</a></li>
+    <li><a href="about.html" class="nav-link">About</a></li>
+  </ul>
+  <div class="nav-right">
+    <span class="live-badge">🔴 LIVE</span>
+    <button class="btn-refresh" onclick="refreshData()">↻ Refresh</button>
+    <button class="hamburger" onclick="toggleMenu()">☰</button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="toggleMenu()">Overview</a>
+  <a href="platforms.html" onclick="toggleMenu()">Platforms</a>
+  <a href="posts.html" onclick="toggleMenu()">Posts</a>
+  <a href="growth.html" onclick="toggleMenu()">Growth</a>
+  <a href="about.html" onclick="toggleMenu()">About</a>
+</div>
+
+<div class="page-hero">
+  <h1>Growth <span class="accent">Analytics</span></h1>
+  <p>Follower growth trends across all platforms over time</p>
+</div>
+
+<section class="growth-section">
+
+  <div class="chart-card wide" style="margin-bottom:2rem;">
+    <div class="chart-header">
+      <h3>Follower Growth — All Platforms (Monthly)</h3>
+      <div>
+        <button class="filter-btn active small" onclick="switchGrowthChart('monthly',this)">Monthly</button>
+        <button class="filter-btn small" onclick="switchGrowthChart('weekly',this)">Weekly</button>
+      </div>
+    </div>
+    <canvas id="growthLineChart" height="100"></canvas>
+  </div>
+
+  <div class="charts-grid">
+    <div class="chart-card">
+      <div class="chart-header"><h3>Engagement Rate Trend</h3></div>
+      <canvas id="engagementChart" height="180"></canvas>
+    </div>
+    <div class="chart-card">
+      <div class="chart-header"><h3>Monthly Reach Comparison</h3></div>
+      <canvas id="reachBarChart" height="180"></canvas>
+    </div>
+  </div>
+
+  <div class="chart-card wide" style="margin-top:2rem;">
+    <div class="chart-header"><h3>Shares & Comments Over Time</h3></div>
+    <canvas id="sharesChart" height="100"></canvas>
+  </div>
+
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <p class="footer-brand">📊 SocialScope</p>
+      <p class="footer-sub">Built by <strong>Bhargavi N</strong></p>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Overview</a>
+      <a href="platforms.html">Platforms</a>
+      <a href="posts.html">Posts</a>
+      <a href="growth.html">Growth</a>
+      <a href="about.html">About</a>
+    </div>
+  </div>
+  <p class="footer-copy">© 2026 Bhargavi N. All rights reserved.</p>
+</footer>
+
+<script src="main.js"></script>
+<script>
+const months = ['Oct','Nov','Dec','Jan','Feb','Mar'];
+const weeks  = ['W1','W2','W3','W4','W5','W6','W7','W8'];
+
+const monthlyData = {
+  instagram:[98000,105000,112000,118000,124000,128400],
+  youtube:  [60000, 66000, 71000, 76000, 80000, 84600],
+  twitter:  [28000, 30000, 32000, 33500, 34800, 35500]
+};
+const weeklyData = {
+  instagram:[120000,121500,123000,124200,125800,126500,127600,128400],
+  youtube:  [80000,81000,82000,82800,83400,83900,84300,84600],
+  twitter:  [34000,34200,34500,34800,35000,35100,35300,35500]
+};
+
+let growthChart = new Chart(document.getElementById('growthLineChart'),{
+  type:'line',
+  data:{
+    labels:months,
+    datasets:[
+      {label:'Instagram',data:monthlyData.instagram,borderColor:'#c13584',backgroundColor:'rgba(193,53,132,0.05)',tension:0.4,fill:true},
+      {label:'YouTube',data:monthlyData.youtube,borderColor:'#ff0000',backgroundColor:'rgba(255,0,0,0.05)',tension:0.4,fill:true},
+      {label:'Twitter',data:monthlyData.twitter,borderColor:'#1da1f2',backgroundColor:'rgba(29,161,242,0.05)',tension:0.4,fill:true},
+    ]
+  },
+  options:{plugins:{legend:{position:'top'}},scales:{y:{beginAtZero:false}}}
+});
+
+function switchGrowthChart(type, btn){
+  document.querySelectorAll('.growth-section .filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const d = type==='monthly'?monthlyData:weeklyData;
+  const l = type==='monthly'?months:weeks;
+  growthChart.data.labels = l;
+  growthChart.data.datasets[0].data = d.instagram;
+  growthChart.data.datasets[1].data = d.youtube;
+  growthChart.data.datasets[2].data = d.twitter;
+  growthChart.update();
+}
+
+new Chart(document.getElementById('engagementChart'),{
+  type:'line',
+  data:{labels:months,datasets:[{label:'Engagement %',data:[4.2,4.5,4.9,4.7,4.6,4.8],borderColor:'#6c3483',backgroundColor:'rgba(108,52,131,0.1)',tension:0.4,fill:true}]},
+  options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:false,max:6}}}
+});
+
+new Chart(document.getElementById('reachBarChart'),{
+  type:'bar',
+  data:{
+    labels:months,
+    datasets:[
+      {label:'Instagram',data:[320000,360000,390000,410000,430000,450000],backgroundColor:'rgba(193,53,132,0.7)'},
+      {label:'YouTube',data:[1400000,1600000,1750000,1850000,1950000,2100000],backgroundColor:'rgba(255,0,0,0.7)'},
+      {label:'Twitter',data:[200000,240000,270000,290000,305000,320000],backgroundColor:'rgba(29,161,242,0.7)'},
+    ]
+  },
+  options:{plugins:{legend:{position:'top'}},scales:{x:{stacked:false},y:{beginAtZero:true}}}
+});
+
+new Chart(document.getElementById('sharesChart'),{
+  type:'bar',
+  data:{
+    labels:months,
+    datasets:[
+      {label:'Shares',data:[62000,69000,74000,80000,88000,94750],backgroundColor:'rgba(52,152,219,0.7)',borderRadius:4},
+      {label:'Comments',data:[31000,35000,38000,41000,45000,48200],backgroundColor:'rgba(46,204,113,0.7)',borderRadius:4},
+    ]
+  },
+  options:{plugins:{legend:{position:'top'}},scales:{y:{beginAtZero:true}}}
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About | SocialScope – Bhargavi N</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-brand">
+    <a href="index.html" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:inherit;">
+      <span class="brand-icon">📊</span>
+      <span class="brand-name">SocialScope</span>
+    </a>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html" class="nav-link">Overview</a></li>
+    <li><a href="platforms.html" class="nav-link">Platforms</a></li>
+    <li><a href="posts.html" class="nav-link">Posts</a></li>
+    <li><a href="growth.html" class="nav-link">Growth</a></li>
+    <li><a href="about.html" class="nav-link active">About</a></li>
+  </ul>
+  <div class="nav-right">
+    <span class="live-badge">🔴 LIVE</span>
+    <button class="btn-refresh" onclick="refreshData()">↻ Refresh</button>
+    <button class="hamburger" onclick="toggleMenu()">☰</button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="toggleMenu()">Overview</a>
+  <a href="platforms.html" onclick="toggleMenu()">Platforms</a>
+  <a href="posts.html" onclick="toggleMenu()">Posts</a>
+  <a href="growth.html" onclick="toggleMenu()">Growth</a>
+  <a href="about.html" onclick="toggleMenu()">About</a>
+</div>
+
+<div class="page-hero">
+  <h1>About <span class="accent">This Project</span></h1>
+  <p>Web Development Internship — Industry-Oriented Dashboard</p>
+</div>
+
+<section class="about-section">
+
+  <div class="about-grid">
+    <div class="about-card profile-card">
+      <div class="avatar">BN</div>
+      <h2>Bhargavi N</h2>
+      <p class="role-tag">Web Development Intern</p>
+      <p class="about-bio">Passionate about building clean, interactive web applications. This project demonstrates my ability to create real-world dashboards with data visualization, responsive design, and interactive UI components.</p>
+      <div class="social-links">
+        <a href="https://github.com" target="_blank" class="social-btn github">⬛ GitHub</a>
+        <a href="https://linkedin.com" target="_blank" class="social-btn linkedin">🔷 LinkedIn</a>
+        <a href="mailto:bhargavi@email.com" class="social-btn email">✉️ Email</a>
+      </div>
+    </div>
+
+    <div class="about-details">
+      <div class="about-card">
+        <h3>🎯 Project Objective</h3>
+        <p>Design and develop a responsive web dashboard that displays key social media data metrics in a clear and interactive manner, meeting all requirements of the Web Development Internship.</p>
+      </div>
+      <div class="about-card">
+        <h3>🛠️ Tools & Technologies</h3>
+        <div class="tech-tags">
+          <span class="tech-tag">HTML5</span>
+          <span class="tech-tag">CSS3</span>
+          <span class="tech-tag">JavaScript</span>
+          <span class="tech-tag">Chart.js</span>
+          <span class="tech-tag">CSS Grid</span>
+          <span class="tech-tag">Flexbox</span>
+          <span class="tech-tag">Google Fonts</span>
+          <span class="tech-tag">Git</span>
+        </div>
+      </div>
+      <div class="about-card">
+        <h3>✅ Requirements Completed</h3>
+        <ul class="req-list">
+          <li class="done">✔ Dashboard use case definition</li>
+          <li class="done">✔ Responsive layout design</li>
+          <li class="done">✔ Data display using cards and tables</li>
+          <li class="done">✔ Basic charts using JavaScript (Chart.js)</li>
+          <li class="done">✔ Interactive filters and controls</li>
+          <li class="done">✔ Real-time UI updates (live refresh)</li>
+          <li class="done">✔ Consistent visual hierarchy</li>
+          <li class="done">✔ Cross-browser compatibility</li>
+          <li class="done">✔ Deployment-ready dashboard</li>
+          <li class="done">✔ Project documentation</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="problem-statement">
+    <h3>📋 Problem Statement</h3>
+    <p>Businesses need quick visibility into key metrics, but static pages fail to present insights clearly. Without dashboards, decision-making becomes slow and error-prone. Industry requires web developers who can build clean, interactive dashboards — this project solves exactly that.</p>
+  </div>
+
+  <div class="expected-outcome">
+    <h3>🚀 Expected Outcomes Achieved</h3>
+    <div class="outcome-grid">
+      <div class="outcome-card">
+        <span>🧑‍💻</span>
+        <p>Hands-on experience with dashboard-style web apps</p>
+      </div>
+      <div class="outcome-card">
+        <span>📁</span>
+        <p>Strong data-visualization web portfolio project</p>
+      </div>
+      <div class="outcome-card">
+        <span>🌐</span>
+        <p>Understanding of information hierarchy on the web</p>
+      </div>
+      <div class="outcome-card">
+        <span>💼</span>
+        <p>Job relevance for Frontend, UI & Web Developer roles</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:3rem;">
+    <a href="index.html" class="btn-primary">← Back to Dashboard</a>
+  </div>
+
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <p class="footer-brand">📊 SocialScope</p>
+      <p class="footer-sub">Built by <strong>Bhargavi N</strong></p>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Overview</a>
+      <a href="platforms.html">Platforms</a>
+      <a href="posts.html">Posts</a>
+      <a href="growth.html">Growth</a>
+      <a href="about.html">About</a>
+    </div>
+  </div>
+  <p class="footer-copy">© 2026 Bhargavi N. All rights reserved.</p>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

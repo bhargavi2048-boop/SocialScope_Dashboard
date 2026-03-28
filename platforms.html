@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Platforms | SocialScope – Bhargavi N</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-brand">
+    <a href="index.html" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:inherit;">
+      <span class="brand-icon">📊</span>
+      <span class="brand-name">SocialScope</span>
+    </a>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html" class="nav-link">Overview</a></li>
+    <li><a href="platforms.html" class="nav-link active">Platforms</a></li>
+    <li><a href="posts.html" class="nav-link">Posts</a></li>
+    <li><a href="growth.html" class="nav-link">Growth</a></li>
+    <li><a href="about.html" class="nav-link">About</a></li>
+  </ul>
+  <div class="nav-right">
+    <span class="live-badge">🔴 LIVE</span>
+    <button class="btn-refresh" onclick="refreshData()">↻ Refresh</button>
+    <button class="hamburger" onclick="toggleMenu()">☰</button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="toggleMenu()">Overview</a>
+  <a href="platforms.html" onclick="toggleMenu()">Platforms</a>
+  <a href="posts.html" onclick="toggleMenu()">Posts</a>
+  <a href="growth.html" onclick="toggleMenu()">Growth</a>
+  <a href="about.html" onclick="toggleMenu()">About</a>
+</div>
+
+<div class="page-hero">
+  <h1>Platform <span class="accent">Breakdown</span></h1>
+  <p>Deep-dive into each platform's performance metrics</p>
+</div>
+
+<section class="platform-section">
+
+  <!-- INSTAGRAM -->
+  <div class="platform-block insta-block">
+    <div class="platform-header">
+      <div class="plat-title">
+        <span class="plat-icon">📸</span>
+        <div>
+          <h2>Instagram</h2>
+          <p>@bhargavi_n</p>
+        </div>
+      </div>
+      <a href="https://instagram.com" target="_blank" class="btn-primary small">Visit Profile ↗</a>
+    </div>
+    <div class="plat-kpis">
+      <div class="plat-kpi"><p class="pk-val">128,400</p><p class="pk-label">Followers</p></div>
+      <div class="plat-kpi"><p class="pk-val">4.2%</p><p class="pk-label">Engagement</p></div>
+      <div class="plat-kpi"><p class="pk-val">980</p><p class="pk-label">Posts</p></div>
+      <div class="plat-kpi"><p class="pk-val">450K</p><p class="pk-label">Monthly Reach</p></div>
+    </div>
+    <canvas id="instaChart" height="100"></canvas>
+  </div>
+
+  <!-- YOUTUBE -->
+  <div class="platform-block yt-block">
+    <div class="platform-header">
+      <div class="plat-title">
+        <span class="plat-icon">▶️</span>
+        <div>
+          <h2>YouTube</h2>
+          <p>Bhargavi N</p>
+        </div>
+      </div>
+      <a href="https://youtube.com" target="_blank" class="btn-primary small">Visit Channel ↗</a>
+    </div>
+    <div class="plat-kpis">
+      <div class="plat-kpi"><p class="pk-val">84,600</p><p class="pk-label">Subscribers</p></div>
+      <div class="plat-kpi"><p class="pk-val">6.1%</p><p class="pk-label">Engagement</p></div>
+      <div class="plat-kpi"><p class="pk-val">142</p><p class="pk-label">Videos</p></div>
+      <div class="plat-kpi"><p class="pk-val">2.1M</p><p class="pk-label">Monthly Views</p></div>
+    </div>
+    <canvas id="ytChart" height="100"></canvas>
+  </div>
+
+  <!-- TWITTER -->
+  <div class="platform-block tw-block">
+    <div class="platform-header">
+      <div class="plat-title">
+        <span class="plat-icon">🐦</span>
+        <div>
+          <h2>Twitter / X</h2>
+          <p>@bhargavi_n</p>
+        </div>
+      </div>
+      <a href="https://twitter.com" target="_blank" class="btn-primary small">Visit Profile ↗</a>
+    </div>
+    <div class="plat-kpis">
+      <div class="plat-kpi"><p class="pk-val">35,500</p><p class="pk-label">Followers</p></div>
+      <div class="plat-kpi"><p class="pk-val">3.4%</p><p class="pk-label">Engagement</p></div>
+      <div class="plat-kpi"><p class="pk-val">3,200</p><p class="pk-label">Tweets</p></div>
+      <div class="plat-kpi"><p class="pk-val">320K</p><p class="pk-label">Monthly Reach</p></div>
+    </div>
+    <canvas id="twChart" height="100"></canvas>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <p class="footer-brand">📊 SocialScope</p>
+      <p class="footer-sub">Built by <strong>Bhargavi N</strong></p>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Overview</a>
+      <a href="platforms.html">Platforms</a>
+      <a href="posts.html">Posts</a>
+      <a href="growth.html">Growth</a>
+      <a href="about.html">About</a>
+    </div>
+  </div>
+  <p class="footer-copy">© 2026 Bhargavi N. All rights reserved.</p>
+</footer>
+
+<script src="main.js"></script>
+<script>
+const weeks = ['Week 1','Week 2','Week 3','Week 4'];
+new Chart(document.getElementById('instaChart'), {
+  type:'line',
+  data:{labels:weeks,datasets:[{label:'Reach',data:[390000,410000,430000,450000],borderColor:'#c13584',backgroundColor:'rgba(193,53,132,0.1)',tension:0.4,fill:true}]},
+  options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:false}}}
+});
+new Chart(document.getElementById('ytChart'), {
+  type:'line',
+  data:{labels:weeks,datasets:[{label:'Views',data:[1800000,1950000,2050000,2100000],borderColor:'#ff0000',backgroundColor:'rgba(255,0,0,0.1)',tension:0.4,fill:true}]},
+  options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:false}}}
+});
+new Chart(document.getElementById('twChart'), {
+  type:'line',
+  data:{labels:weeks,datasets:[{label:'Reach',data:[260000,290000,305000,320000],borderColor:'#1da1f2',backgroundColor:'rgba(29,161,242,0.1)',tension:0.4,fill:true}]},
+  options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:false}}}
+});
+</script>
+</body>
+</html>

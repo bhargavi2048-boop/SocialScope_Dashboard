@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bhargavi N | Social Media Analytics Dashboard</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-brand">
+    <span class="brand-icon">📊</span>
+    <span class="brand-name">SocialScope</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html" class="nav-link active">Overview</a></li>
+    <li><a href="platforms.html" class="nav-link">Platforms</a></li>
+    <li><a href="posts.html" class="nav-link">Posts</a></li>
+    <li><a href="growth.html" class="nav-link">Growth</a></li>
+    <li><a href="about.html" class="nav-link">About</a></li>
+  </ul>
+  <div class="nav-right">
+    <span class="live-badge">🔴 LIVE</span>
+    <button class="btn-refresh" onclick="refreshData()">↻ Refresh</button>
+    <button class="hamburger" onclick="toggleMenu()">☰</button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="toggleMenu()">Overview</a>
+  <a href="platforms.html" onclick="toggleMenu()">Platforms</a>
+  <a href="posts.html" onclick="toggleMenu()">Posts</a>
+  <a href="growth.html" onclick="toggleMenu()">Growth</a>
+  <a href="about.html" onclick="toggleMenu()">About</a>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-content">
+    <p class="hero-sub">Bhargavi N &mdash; Web Development Portfolio</p>
+    <h1 class="hero-title">Social Media<br/><span class="accent">Analytics</span> Dashboard</h1>
+    <p class="hero-desc">Track all your social media metrics in one place — followers, engagement, reach, and growth trends visualised in real time.</p>
+    <div class="hero-actions">
+      <a href="platforms.html" class="btn-primary">Explore Platforms →</a>
+      <a href="about.html" class="btn-outline">About This Project</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="floating-card fc1">
+      <span>📈</span>
+      <div>
+        <p class="fc-label">Followers</p>
+        <p class="fc-val" id="heroFollowers">248.5K</p>
+      </div>
+    </div>
+    <div class="floating-card fc2">
+      <span>❤️</span>
+      <div>
+        <p class="fc-label">Total Likes</p>
+        <p class="fc-val" id="heroLikes">1.2M</p>
+      </div>
+    </div>
+    <div class="floating-card fc3">
+      <span>🚀</span>
+      <div>
+        <p class="fc-label">Reach</p>
+        <p class="fc-val" id="heroReach">3.8M</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- FILTER BAR -->
+<section class="filter-section">
+  <div class="filter-bar">
+    <span class="filter-label">Filter by Platform:</span>
+    <button class="filter-btn active" onclick="filterPlatform('all', this)">All</button>
+    <button class="filter-btn insta" onclick="filterPlatform('instagram', this)">📸 Instagram</button>
+    <button class="filter-btn youtube" onclick="filterPlatform('youtube', this)">▶️ YouTube</button>
+    <button class="filter-btn twitter" onclick="filterPlatform('twitter', this)">🐦 Twitter</button>
+    <span class="filter-label" style="margin-left:auto;">Period:</span>
+    <select class="period-select" onchange="changePeriod(this.value)">
+      <option value="7">Last 7 Days</option>
+      <option value="30" selected>Last 30 Days</option>
+      <option value="90">Last 90 Days</option>
+    </select>
+  </div>
+</section>
+
+<!-- KPI CARDS -->
+<section class="kpi-section">
+  <div class="kpi-grid" id="kpiGrid">
+    <div class="kpi-card" data-platform="all instagram youtube twitter">
+      <div class="kpi-icon" style="background:#f0f4ff;">📣</div>
+      <div class="kpi-info">
+        <p class="kpi-label">Total Reach</p>
+        <p class="kpi-value" id="totalReach">3,847,200</p>
+        <p class="kpi-change positive">▲ 12.4% this month</p>
+      </div>
+    </div>
+    <div class="kpi-card" data-platform="all instagram youtube twitter">
+      <div class="kpi-icon" style="background:#fff0f5;">👥</div>
+      <div class="kpi-info">
+        <p class="kpi-label">Total Followers</p>
+        <p class="kpi-value" id="totalFollowers">248,500</p>
+        <p class="kpi-change positive">▲ 5.2% this month</p>
+      </div>
+    </div>
+    <div class="kpi-card" data-platform="all instagram youtube twitter">
+      <div class="kpi-icon" style="background:#f0fff4;">❤️</div>
+      <div class="kpi-info">
+        <p class="kpi-label">Total Likes</p>
+        <p class="kpi-value" id="totalLikes">1,203,400</p>
+        <p class="kpi-change positive">▲ 8.7% this month</p>
+      </div>
+    </div>
+    <div class="kpi-card" data-platform="all instagram youtube twitter">
+      <div class="kpi-icon" style="background:#fffbf0;">💬</div>
+      <div class="kpi-info">
+        <p class="kpi-label">Engagement Rate</p>
+        <p class="kpi-value" id="engagementRate">4.8%</p>
+        <p class="kpi-change negative">▼ 0.3% this month</p>
+      </div>
+    </div>
+    <div class="kpi-card" data-platform="all instagram">
+      <div class="kpi-icon" style="background:#fdf0ff;">📸</div>
+      <div class="kpi-info">
+        <p class="kpi-label">Instagram Followers</p>
+        <p class="kpi-value">128,400</p>
+        <p class="kpi-change positive">▲ 3.1%</p>
+      </div>
+    </div>
+    <div class="kpi-card" data-platform="all youtube">
+      <div class="kpi-icon" style="background:#fff0f0;">▶️</div>
+      <div class="kpi-info">
+        <p class="kpi-label">YouTube Subscribers</p>
+        <p class="kpi-value">84,600</p>
+        <p class="kpi-change positive">▲ 7.8%</p>
+      </div>
+    </div>
+    <div class="kpi-card" data-platform="all twitter">
+      <div class="kpi-icon" style="background:#f0f8ff;">🐦</div>
+      <div class="kpi-info">
+        <p class="kpi-label">Twitter Followers</p>
+        <p class="kpi-value">35,500</p>
+        <p class="kpi-change negative">▼ 1.2%</p>
+      </div>
+    </div>
+    <div class="kpi-card" data-platform="all instagram youtube twitter">
+      <div class="kpi-icon" style="background:#f5fff0;">🔁</div>
+      <div class="kpi-info">
+        <p class="kpi-label">Total Shares</p>
+        <p class="kpi-value">94,750</p>
+        <p class="kpi-change positive">▲ 15.6%</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHARTS ROW -->
+<section class="charts-section">
+  <div class="charts-grid">
+    <div class="chart-card wide">
+      <div class="chart-header">
+        <h3>Weekly Reach by Platform</h3>
+        <a href="growth.html" class="chart-link">View Full Growth →</a>
+      </div>
+      <canvas id="reachChart" height="120"></canvas>
+    </div>
+    <div class="chart-card">
+      <div class="chart-header">
+        <h3>Platform Distribution</h3>
+      </div>
+      <canvas id="pieChart" height="200"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- TOP POSTS PREVIEW -->
+<section class="posts-preview">
+  <div class="section-header">
+    <h2>Top Performing Posts</h2>
+    <a href="posts.html" class="btn-outline small">View All Posts →</a>
+  </div>
+  <div class="posts-table-wrap">
+    <table class="posts-table">
+      <thead>
+        <tr>
+          <th>Platform</th>
+          <th>Post</th>
+          <th>Likes</th>
+          <th>Comments</th>
+          <th>Shares</th>
+          <th>Reach</th>
+        </tr>
+      </thead>
+      <tbody id="homePostsTable">
+        <tr><td><span class="plat-badge insta">📸 Instagram</span></td><td>Morning routine vlog highlights</td><td>24,310</td><td>1,820</td><td>3,400</td><td>180,000</td></tr>
+        <tr><td><span class="plat-badge yt">▶️ YouTube</span></td><td>Full tutorial: Building a dashboard</td><td>18,900</td><td>2,100</td><td>5,600</td><td>220,000</td></tr>
+        <tr><td><span class="plat-badge tw">🐦 Twitter</span></td><td>Thread: 10 CSS tips for beginners</td><td>9,400</td><td>870</td><td>4,200</td><td>95,000</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <p class="footer-brand">📊 SocialScope</p>
+      <p class="footer-sub">Built by <strong>Bhargavi N</strong></p>
+      <p class="footer-sub">Web Development Internship Project</p>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Overview</a>
+      <a href="platforms.html">Platforms</a>
+      <a href="posts.html">Posts</a>
+      <a href="growth.html">Growth</a>
+      <a href="about.html">About</a>
+    </div>
+  </div>
+  <p class="footer-copy">© 2026 Bhargavi N. All rights reserved.</p>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

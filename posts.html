@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Posts | SocialScope – Bhargavi N</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-brand">
+    <a href="index.html" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:inherit;">
+      <span class="brand-icon">📊</span>
+      <span class="brand-name">SocialScope</span>
+    </a>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html" class="nav-link">Overview</a></li>
+    <li><a href="platforms.html" class="nav-link">Platforms</a></li>
+    <li><a href="posts.html" class="nav-link active">Posts</a></li>
+    <li><a href="growth.html" class="nav-link">Growth</a></li>
+    <li><a href="about.html" class="nav-link">About</a></li>
+  </ul>
+  <div class="nav-right">
+    <span class="live-badge">🔴 LIVE</span>
+    <button class="btn-refresh" onclick="refreshData()">↻ Refresh</button>
+    <button class="hamburger" onclick="toggleMenu()">☰</button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="toggleMenu()">Overview</a>
+  <a href="platforms.html" onclick="toggleMenu()">Platforms</a>
+  <a href="posts.html" onclick="toggleMenu()">Posts</a>
+  <a href="growth.html" onclick="toggleMenu()">Growth</a>
+  <a href="about.html" onclick="toggleMenu()">About</a>
+</div>
+
+<div class="page-hero">
+  <h1>Post <span class="accent">Performance</span></h1>
+  <p>All posts ranked by reach, likes, and engagement</p>
+</div>
+
+<section class="posts-controls">
+  <div class="filter-bar">
+    <span class="filter-label">Platform:</span>
+    <button class="filter-btn active" onclick="filterTable('all',this)">All</button>
+    <button class="filter-btn insta" onclick="filterTable('instagram',this)">📸 Instagram</button>
+    <button class="filter-btn youtube" onclick="filterTable('youtube',this)">▶️ YouTube</button>
+    <button class="filter-btn twitter" onclick="filterTable('twitter',this)">🐦 Twitter</button>
+    <span class="filter-label" style="margin-left:auto;">Sort by:</span>
+    <select class="period-select" onchange="sortTable(this.value)">
+      <option value="likes">Likes</option>
+      <option value="reach" selected>Reach</option>
+      <option value="comments">Comments</option>
+      <option value="shares">Shares</option>
+    </select>
+  </div>
+</section>
+
+<section class="posts-full">
+  <div class="posts-table-wrap">
+    <table class="posts-table" id="fullPostsTable">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Platform</th>
+          <th>Post Title</th>
+          <th>Date</th>
+          <th>Likes</th>
+          <th>Comments</th>
+          <th>Shares</th>
+          <th>Reach</th>
+          <th>Engagement</th>
+        </tr>
+      </thead>
+      <tbody id="postsBody">
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <p class="footer-brand">📊 SocialScope</p>
+      <p class="footer-sub">Built by <strong>Bhargavi N</strong></p>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Overview</a>
+      <a href="platforms.html">Platforms</a>
+      <a href="posts.html">Posts</a>
+      <a href="growth.html">Growth</a>
+      <a href="about.html">About</a>
+    </div>
+  </div>
+  <p class="footer-copy">© 2026 Bhargavi N. All rights reserved.</p>
+</footer>
+
+<script src="main.js"></script>
+<script>
+const allPosts = [
+  {platform:'instagram',title:'Morning routine vlog highlights',date:'Mar 20',likes:24310,comments:1820,shares:3400,reach:180000},
+  {platform:'youtube',title:'Full tutorial: Building a dashboard',date:'Mar 18',likes:18900,comments:2100,shares:5600,reach:220000},
+  {platform:'twitter',title:'Thread: 10 CSS tips for beginners',date:'Mar 15',likes:9400,comments:870,shares:4200,reach:95000},
+  {platform:'instagram',title:'Behind the scenes: Dev setup tour',date:'Mar 12',likes:21000,comments:1500,shares:2800,reach:160000},
+  {platform:'youtube',title:'JavaScript arrays explained simply',date:'Mar 10',likes:15200,comments:1800,shares:4100,reach:195000},
+  {platform:'twitter',title:'Hot take: Tailwind vs Bootstrap',date:'Mar 8',likes:7800,comments:1200,shares:3900,reach:78000},
+  {platform:'instagram',title:'My 30-day coding challenge results',date:'Mar 5',likes:19600,comments:1300,shares:2500,reach:145000},
+  {platform:'youtube',title:'Responsive design crash course',date:'Mar 3',likes:13400,comments:1600,shares:3700,reach:175000},
+  {platform:'twitter',title:'5 free tools every developer needs',date:'Mar 1',likes:8900,comments:720,shares:5100,reach:102000},
+  {platform:'instagram',title:'What I wish I knew before coding',date:'Feb 28',likes:17200,comments:1100,shares:2100,reach:130000},
+];
+
+function renderTable(data){
+  const body = document.getElementById('postsBody');
+  body.innerHTML = data.map((p,i)=>`
+    <tr>
+      <td>${i+1}</td>
+      <td><span class="plat-badge ${p.platform==='instagram'?'insta':p.platform==='youtube'?'yt':'tw'}">${p.platform==='instagram'?'📸 Instagram':p.platform==='youtube'?'▶️ YouTube':'🐦 Twitter'}</span></td>
+      <td>${p.title}</td>
+      <td>${p.date}</td>
+      <td>${p.likes.toLocaleString()}</td>
+      <td>${p.comments.toLocaleString()}</td>
+      <td>${p.shares.toLocaleString()}</td>
+      <td>${p.reach.toLocaleString()}</td>
+      <td>${((p.likes+p.comments+p.shares)/p.reach*100).toFixed(1)}%</td>
+    </tr>
+  `).join('');
+}
+
+let currentFilter = 'all', currentSort = 'reach';
+
+function filterTable(platform, btn){
+  currentFilter = platform;
+  document.querySelectorAll('.posts-controls .filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+
+function sortTable(field){
+  currentSort = field;
+  applyFilters();
+}
+
+function applyFilters(){
+  let data = currentFilter==='all'?allPosts:allPosts.filter(p=>p.platform===currentFilter);
+  data = [...data].sort((a,b)=>b[currentSort]-a[currentSort]);
+  renderTable(data);
+}
+
+applyFilters();
+</script>
+</body>
+</html>
