@@ -21,6 +21,10 @@ A fully responsive, multi-page social media analytics dashboard built with pure 
 
 ## 🚀 Live Demo
 
+Demo Link: "https://bhargavi2048-boop.github.io/SocialScope_Dashboard/"
+
+Demo Video: "https://drive.google.com/file/d/1X14eazTzJ8P_Qx7-2_w4wIkCROpbQpTb/view?usp=sharing"
+
 Open `index.html` directly in any modern browser — no server or build tools required.
 
 ---
